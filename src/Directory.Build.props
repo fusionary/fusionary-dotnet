@@ -1,0 +1,35 @@
+<Project>
+
+    <PropertyGroup Label="Build">
+        <LangVersion>latest</LangVersion>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Versioning">
+        <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+        <MinVerVerbosity>normal</MinVerVerbosity>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Authors>Fusionary</Authors>
+        <PackageProjectUrl>https://github.com/fusionary/fusionary-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/fusionary/fusionary-dotnet</RepositoryUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/fusionary/fusionary-dotnet/main/src/icon.png</PackageIconUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageTags>dotnet</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="icon.png" Visible="false" />
+    </ItemGroup>
+
+    <ItemGroup Label="Package References">
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="17.1.46"/>
+        <PackageReference Include="MinVer" PrivateAssets="all" Version="3.1.0"/>
+    </ItemGroup>
+
+</Project>
