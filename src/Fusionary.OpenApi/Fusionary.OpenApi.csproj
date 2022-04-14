@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+      <PackageReference Include="Microsoft.OpenApi" Version="1.3.1" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fusionary.Core\Fusionary.Core.csproj" />
+      <ProjectReference Include="..\Fusionary.Web\Fusionary.Web.csproj" />
+    </ItemGroup>
+
+</Project>
