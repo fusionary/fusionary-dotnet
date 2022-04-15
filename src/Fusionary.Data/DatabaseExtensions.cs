@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Fusionary.Data; 
 
 public static class UseDatabaseExtensions {
-    public static DatabaseConfig UseDatabaseConfig(this IConfiguration configuration, IServiceCollection services, string databaseConfigName = "Database")
+    public static DatabaseConfig UseDatabaseConfig(this  IServiceCollection services, IConfiguration configuration, string databaseConfigName = "Database")
     {
         var configSection = configuration.GetSection(databaseConfigName);
         
