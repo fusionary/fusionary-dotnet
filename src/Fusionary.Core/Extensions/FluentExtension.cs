@@ -5,7 +5,7 @@ public static class FluentExtension {
         return condition ? conditionalAction(thisInstance) : thisInstance;
     }
     
-    public static T With<T>(this T thisInstance, Func<T, T> withAction)
+    public static T With<T>(this T thisInstance, Action<T> withAction)
     {
         withAction(thisInstance);
         return thisInstance;
