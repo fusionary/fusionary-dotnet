@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{22
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Data.Postgres", "Fusionary.Data.Postgres\Fusionary.Data.Postgres.csproj", "{05A86079-D80E-42B2-9B5F-8912D1BF70E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,5 +52,9 @@ Global
 		{0FF9874D-3D68-4652-BE6F-85E702D28A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FF9874D-3D68-4652-BE6F-85E702D28A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FF9874D-3D68-4652-BE6F-85E702D28A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

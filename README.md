@@ -17,3 +17,8 @@ dotnet nuget push "**/*.nupkg" --skip-duplicate
 dotnet pack --configuration Release
 dotnet nuget push "**/*.nupkg" --skip-duplicate
 ```
+
+(run this to cleanup left overs)
+```
+rm -rf ./**/*.nupkg
+```
