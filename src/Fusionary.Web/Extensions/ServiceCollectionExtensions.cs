@@ -34,7 +34,6 @@ public static class ServiceCollectionExtensions {
     {
         app
             .UseForwardedHeaders()
-            .UseRouting()
             .UseResponseCaching()
             .UseResponseCompression()
             .UseIf(
