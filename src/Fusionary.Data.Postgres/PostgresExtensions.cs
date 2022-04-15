@@ -1,5 +1,7 @@
 using Dapper;
 
+using Fusionary.Data.Config;
+
 using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -8,14 +10,23 @@ namespace Fusionary.Data.Postgres;
 
 [UsedImplicitly]
 public static class PostgresExtensions {
-    public static void UsePostgres(this IServiceCollection services, Action<PostgresOptions>? configure = null)
+    public static IDataProviderConfig UsePostgres(this IServiceCollection services)
+    {
+        return UsePostgres(services, _ => { });
+    }
+
+    public static IDataProviderConfig UsePostgres(this IServiceCollection services, Action<PostgresOptions> setupAction)
     {
         var options = new PostgresOptions();
         
-        configure?.Invoke(options);
+        setupAction(options);
         
         DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-        services.AddSingleton(PostgresProviderConfig.Create(options));
+        var provider = PostgresProviderConfig.Create(options);
+        
+        services.AddSingleton(provider);
+
+        return provider;
     }
 }

@@ -1,12 +1,54 @@
 using System.Reflection;
 
+using Fusionary.Web.ConfigureOptions;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fusionary.Web.Extensions;
 
 public static class ServiceCollectionExtensions {
+    public static IServiceCollection AddStandardWebServices(this IServiceCollection services)
+    {
+        return services
+            .AddTransient(typeof(Lazy<>), typeof(LazyService<>))
+            .AddMemoryCache()
+            .AddCors()
+            .AddResponseCaching()
+            .AddResponseCompression(options => {
+                options.EnableForHttps = true;
+            })
+            .AddHttpContextAccessor()
+            .AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+    }
+
+    public static IMvcBuilder AddMvcServices(this IServiceCollection services)
+    {
+        return services
+            .AddRouting()
+            .AddControllers();
+    }
+
+    public static WebApplication UseStandardWebService(this WebApplication app)
+    {
+        app
+            .UseForwardedHeaders()
+            .UseRouting()
+            .UseResponseCaching()
+            .UseResponseCompression()
+            .UseIf(
+                app.Environment.IsLocalOrDevelopment(),
+                x => x.UseDeveloperExceptionPage()
+            )
+            .UseStaticFiles()
+            .UseHttpsRedirection();
+
+        return app;
+    }
+
     /// <summary>
-    /// Adds types that implement <typeparamref name="T" /> to the services collection
+    ///     Adds types that implement <typeparamref name="T" /> to the services collection
     /// </summary>
     /// <param name="services">The services registry</param>
     /// <param name="assemblies">The source assemblies</param>
@@ -17,12 +59,12 @@ public static class ServiceCollectionExtensions {
         this IServiceCollection services,
         IEnumerable<Assembly> assemblies,
         ServiceLifetime lifetime = ServiceLifetime.Singleton
-    ) {
+    )
+    {
         var baseType = typeof(T);
 
-        if (!baseType.IsInterface) {
+        if (!baseType.IsInterface)
             throw new ArgumentOutOfRangeException(nameof(T), $"{nameof(T)} must be an interface");
-        }
 
         var typesFromAssemblies = assemblies.SelectMany(
             a => a.DefinedTypes.Where(x => !x.IsAbstract && x.GetInterfaces().Contains(baseType))

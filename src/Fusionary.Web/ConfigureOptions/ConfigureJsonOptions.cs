@@ -25,11 +25,14 @@ public class ConfigureJsonOptions : IConfigureOptions<JsonOptions> {
 
     /// <inheritdoc />
     public void Configure(JsonOptions options) {
-        var jsonSerializerOptions = options.JsonSerializerOptions;
-        jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        jsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+        var jsonOptions = options.JsonSerializerOptions;
+        
+        jsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        jsonOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        jsonOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+        jsonOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 
         // Pretty print the JSON in development for easier debugging.
-        jsonSerializerOptions.WriteIndented = webHostEnvironment.IsLocalOrDevelopment();
+        jsonOptions.WriteIndented = webHostEnvironment.IsLocalOrDevelopment();
     }
 }
