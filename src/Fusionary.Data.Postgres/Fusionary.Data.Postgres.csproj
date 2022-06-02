@@ -6,7 +6,10 @@
     
     <ItemGroup Label="Package References">
         <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.3.2" />
-        <PackageReference Include="Npgsql" Version="6.0.3" />
+        <PackageReference Include="Npgsql" Version="6.0.4" />
+        <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32" />
+        <PackageReference Update="JetBrains.Annotations" Version="2022.1.0" />
+        <PackageReference Update="MinVer" Version="4.0.0" />
     </ItemGroup>
     
     <ItemGroup Label="Project References">
