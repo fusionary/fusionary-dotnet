@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{22
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Data.Postgres", "Fusionary.Data.Postgres\Fusionary.Data.Postgres.csproj", "{05A86079-D80E-42B2-9B5F-8912D1BF70E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Auth.Google", "Fusionary.Auth.Google\Fusionary.Auth.Google.csproj", "{3B3BF067-3087-4049-82C3-F6E5A8FBAFF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Auth.Abstractions", "Fusionary.Auth.Abstractions\Fusionary.Auth.Abstractions.csproj", "{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,5 +60,13 @@ Global
 		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05A86079-D80E-42B2-9B5F-8912D1BF70E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B3BF067-3087-4049-82C3-F6E5A8FBAFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B3BF067-3087-4049-82C3-F6E5A8FBAFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B3BF067-3087-4049-82C3-F6E5A8FBAFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B3BF067-3087-4049-82C3-F6E5A8FBAFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

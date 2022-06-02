@@ -24,12 +24,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="icon.png" Visible="false" />
+        <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="icon.png" Visible="false"/>
     </ItemGroup>
 
     <ItemGroup Label="Package References">
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="17.1.46"/>
-        <PackageReference Include="JetBrains.Annotations" PrivateAssets="all" Version="2021.3.0" />
+        <PackageReference Include="JetBrains.Annotations" PrivateAssets="all" Version="2021.3.0"/>
         <PackageReference Include="MinVer" PrivateAssets="all" Version="3.1.0"/>
     </ItemGroup>
 
