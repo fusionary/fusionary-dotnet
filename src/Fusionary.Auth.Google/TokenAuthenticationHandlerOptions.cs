@@ -1,7 +1,5 @@
-namespace Fusionary.Auth.Google;
-
 using Microsoft.AspNetCore.Authentication;
 
-public class TokenAuthenticationHandlerOptions : AuthenticationSchemeOptions
-{
-}
+namespace Fusionary.Auth.Google;
+
+public class TokenAuthenticationHandlerOptions : AuthenticationSchemeOptions { }

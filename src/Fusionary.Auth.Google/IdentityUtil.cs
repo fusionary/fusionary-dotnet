@@ -1,11 +1,12 @@
-namespace Fusionary.Auth.Google;
-
 using System.Security.Claims;
-using Core.Extensions;
+
+using Fusionary.Core.Extensions;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-public static class IdentityUtil
-{
+namespace Fusionary.Auth.Google;
+
+public static class IdentityUtil {
     public static ClaimsIdentity CreateIdentity(this TokenData tokenData, string? authenticationType = null)
     {
         var claims = CreateClaims(tokenData);
@@ -27,10 +28,10 @@ public static class IdentityUtil
     private static IEnumerable<Claim> CreateClaims(TokenData tokenData)
     {
         var claims = new List<Claim> {
-                                         { ClaimTypes.NameIdentifier, tokenData.UserID },
-                                         { ClaimTypes.Name, tokenData.Name },
-                                         { ClaimTypes.Email, tokenData.Email }
-                                     };
+            { ClaimTypes.NameIdentifier, tokenData.UserID },
+            { ClaimTypes.Name, tokenData.Name },
+            { ClaimTypes.Email, tokenData.Email }
+        };
 
         claims.AddRange(tokenData.Roles.Select(roleName => new Claim(ClaimTypes.Role, roleName)));
 

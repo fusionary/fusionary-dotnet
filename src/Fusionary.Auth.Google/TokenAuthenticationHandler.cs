@@ -1,14 +1,14 @@
-namespace Fusionary.Auth.Google;
-
 using System.Net.Http.Headers;
 using System.Text.Encodings.Web;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-public class TokenAuthenticationHandler : AuthenticationHandler<TokenAuthenticationHandlerOptions>
-{
+namespace Fusionary.Auth.Google;
+
+public class TokenAuthenticationHandler : AuthenticationHandler<TokenAuthenticationHandlerOptions> {
     private readonly TokenService _tokenService;
 
     public TokenAuthenticationHandler(
@@ -16,18 +16,18 @@ public class TokenAuthenticationHandler : AuthenticationHandler<TokenAuthenticat
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock,
-        TokenService tokenService)
+        TokenService tokenService
+    )
         : base(options, logger, encoder, clock)
     {
-        this._tokenService = tokenService;
+        _tokenService = tokenService;
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         try {
-            return await this.DoHandleAuthenticateAsync();
-        }
-        catch (AuthException ex) {
+            return await DoHandleAuthenticateAsync();
+        } catch (AuthException ex) {
             return AuthenticateResult.Fail(ex.Message);
         }
     }
@@ -43,29 +43,26 @@ public class TokenAuthenticationHandler : AuthenticationHandler<TokenAuthenticat
 
     private Task<AuthenticateResult> DoHandleAuthenticateAsync()
     {
-        this.Request.Headers.TryGetValue("authorization", out var authorizationHeaderValues);
-        this.Request.Query.TryGetValue("auth_token", out var queryStringValues);
+        Request.Headers.TryGetValue("authorization", out var authorizationHeaderValues);
+        Request.Query.TryGetValue("auth_token", out var queryStringValues);
 
         var result = AuthenticateResult.NoResult();
 
         if (authorizationHeaderValues.Count > 0) {
-            foreach (var value in authorizationHeaderValues) {
+            foreach (var value in authorizationHeaderValues)
                 if (
                     AuthenticationHeaderValue.TryParse(value, out var headerValue)
-                    && headerValue.Scheme.Equals(JwtBearerDefaults.AuthenticationScheme,
-                        StringComparison.OrdinalIgnoreCase)
+                    && headerValue.Scheme.Equals(
+                        JwtBearerDefaults.AuthenticationScheme,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                     && !string.IsNullOrWhiteSpace(headerValue.Parameter)
-                ) {
-                    result = this.GetAuthenticateResult(headerValue.Parameter);
-                }
-            }
-        }
-        else if (queryStringValues.Count > 0) {
+                )
+                    result = GetAuthenticateResult(headerValue.Parameter);
+        } else if (queryStringValues.Count > 0) {
             var value = queryStringValues.First();
 
-            if (!string.IsNullOrWhiteSpace(value)) {
-                result = this.GetAuthenticateResult(value);
-            }
+            if (!string.IsNullOrWhiteSpace(value)) result = GetAuthenticateResult(value);
         }
 
         return Task.FromResult(result);
@@ -73,11 +70,9 @@ public class TokenAuthenticationHandler : AuthenticationHandler<TokenAuthenticat
 
     private AuthenticateResult GetAuthenticateResult(string value)
     {
-        var tokenData = this._tokenService.Unprotect(value);
+        var tokenData = _tokenService.Unprotect(value);
 
-        if (tokenData == null) {
-            return AuthenticateResult.NoResult();
-        }
+        if (tokenData == null) return AuthenticateResult.NoResult();
 
         var ticket = CreateAuthenticationTicket(tokenData);
 

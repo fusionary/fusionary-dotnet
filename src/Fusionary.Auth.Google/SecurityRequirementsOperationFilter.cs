@@ -1,12 +1,12 @@
-namespace Fusionary.Auth.Google;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
+
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-public class SecurityRequirementsOperationFilter : IOperationFilter
-{
+namespace Fusionary.Auth.Google;
+
+public class SecurityRequirementsOperationFilter : IOperationFilter {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
         var requiredScopes = context.MethodInfo
@@ -16,31 +16,26 @@ public class SecurityRequirementsOperationFilter : IOperationFilter
             .Distinct()
             .ToArray();
 
-        if (!requiredScopes.Any())
-        {
-            return;
-        }
+        if (!requiredScopes.Any()) return;
 
-        operation.Responses.Add("401", new OpenApiResponse
-                                       {
-                                           Description = "Unauthorized",
-                                       });
+        operation.Responses.Add(
+            "401",
+            new OpenApiResponse {
+                Description = "Unauthorized"
+            }
+        );
 
-        var oAuthScheme = new OpenApiSecurityScheme
-                          {
-                              Reference = new OpenApiReference
-                                          {
-                                              Id = JwtBearerDefaults.AuthenticationScheme,
-                                              Type = ReferenceType.SecurityScheme,
-                                          },
-                          };
+        var oAuthScheme = new OpenApiSecurityScheme {
+            Reference = new OpenApiReference {
+                Id = JwtBearerDefaults.AuthenticationScheme,
+                Type = ReferenceType.SecurityScheme
+            }
+        };
 
-        operation.Security = new List<OpenApiSecurityRequirement>
-                             {
-                                 new()
-                                 {
-                                     [oAuthScheme] = requiredScopes.ToList(),
-                                 },
-                             };
+        operation.Security = new List<OpenApiSecurityRequirement> {
+            new() {
+                [oAuthScheme] = requiredScopes.ToList()
+            }
+        };
     }
 }

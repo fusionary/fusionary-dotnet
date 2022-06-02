@@ -1,9 +1,8 @@
-namespace Fusionary.Auth.Google;
-
 using Fusionary.Auth.Abstractions.Models;
 
-public class GoogleUserInfo : IPersonName
-{
+namespace Fusionary.Auth.Google;
+
+public class GoogleUserInfo : IPersonName {
     public string EmailAddress { get; set; } = "";
 
     public string? ImageUrl { get; set; }
@@ -12,7 +11,13 @@ public class GoogleUserInfo : IPersonName
 
     public string? LastName { get; set; }
 
-    public string FullName() => this.FirstName + " " + this.LastName;
+    public string FullName()
+    {
+        return FirstName + " " + LastName;
+    }
 
-    public string Initials() => this.FirstName?.Substring(0, 1) + this.LastName?.Substring(0,1);
+    public string Initials()
+    {
+        return $"{FirstName?[..1]}{LastName?[..1]}".Trim();
+    }
 }

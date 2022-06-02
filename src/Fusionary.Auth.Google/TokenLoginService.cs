@@ -1,10 +1,10 @@
+using Fusionary.Core;
+
+using Google.Apis.Auth;
+
 namespace Fusionary.Auth.Google;
 
-using Fusionary.Core;
-using global::Google.Apis.Auth;
-
-public class TokenLoginService
-{
+public class TokenLoginService {
     private readonly TokenService tokenService;
 
     public TokenLoginService(TokenService tokenService)
@@ -14,17 +14,15 @@ public class TokenLoginService
 
     public async Task<Result<AuthResult>> GoogleLoginAsync(GoogleAuthInput input, CancellationToken cancellationToken)
     {
-        try
-        {
+        try {
             var payload = await GoogleJsonWebSignature.ValidateAsync(input.TokenId);
 
-            var user = this.GetUserInfo(payload);
+            var user = GetUserInfo(payload);
 
             var expiresIn = Convert.ToInt32(payload.ExpirationTimeSeconds ?? TimeSpan.FromDays(1).TotalSeconds);
 
-            return await this.CreateAuthResultAsync(user, expiresIn, cancellationToken);
-        }
-        catch (InvalidJwtException) {
+            return await CreateAuthResultAsync(user, expiresIn, cancellationToken);
+        } catch (InvalidJwtException) {
             return Result.Fail<AuthResult>("Token not valid");
         }
     }
@@ -32,38 +30,39 @@ public class TokenLoginService
     private GoogleUserInfo GetUserInfo(GoogleJsonWebSignature.Payload payload)
     {
         return new GoogleUserInfo {
-                                      EmailAddress = payload.Email,
-                                      FirstName = payload.GivenName,
-                                      LastName = payload.FamilyName,
-                                      ImageUrl = payload.Picture
-                                  };
+            EmailAddress = payload.Email,
+            FirstName = payload.GivenName,
+            LastName = payload.FamilyName,
+            ImageUrl = payload.Picture
+        };
     }
 
     private Task<Result<AuthResult>> CreateAuthResultAsync(
         GoogleUserInfo user,
         int expiresInSeconds,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        var roles = this.GetUserRoles(user.EmailAddress);
+        var roles = GetUserRoles(user.EmailAddress);
 
         var tokenData = new TokenData {
-                                          UserID = user.EmailAddress,
-                                          Name = user.FullName(),
-                                          Email = user.EmailAddress,
-                                          Roles = roles
-                                      };
+            UserID = user.EmailAddress,
+            Name = user.FullName(),
+            Email = user.EmailAddress,
+            Roles = roles
+        };
 
-        var token = this.tokenService.Protect(tokenData, TimeSpan.FromSeconds(expiresInSeconds));
+        var token = tokenService.Protect(tokenData, TimeSpan.FromSeconds(expiresInSeconds));
 
         var authResult = new AuthResult {
-                                            Token = token,
-                                            Name = user.FullName(),
-                                            Initials = user.Initials(),
-                                            Email = user.EmailAddress,
-                                            ProfileImage = user.ImageUrl,
-                                            ExpiresIn = expiresInSeconds,
-                                            Roles = roles
-                                        };
+            Token = token,
+            Name = user.FullName(),
+            Initials = user.Initials(),
+            Email = user.EmailAddress,
+            ProfileImage = user.ImageUrl,
+            ExpiresIn = expiresInSeconds,
+            Roles = roles
+        };
 
         var result = Result.Ok(authResult);
 

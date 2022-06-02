@@ -1,15 +1,16 @@
-namespace Fusionary.Auth.Google;
-
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-public class AuthResult
-{
+namespace Fusionary.Auth.Google;
+
+public class AuthResult {
+    private string[]? _roles;
+
     [Required]
     [JsonPropertyName("email")]
     public string Email { get; set; } = "";
 
-   [Required]
+    [Required]
     [JsonPropertyName("initials")]
     public string Initials { get; set; } = "";
 
@@ -30,5 +31,9 @@ public class AuthResult
 
     [Required]
     [JsonPropertyName("roles")]
-    public string[] Roles { get; set; }
+    public string[] Roles
+    {
+        get => LazyInitializer.EnsureInitialized(ref _roles, Array.Empty<string>);
+        set => _roles = value;
+    }
 }

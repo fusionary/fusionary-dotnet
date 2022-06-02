@@ -1,22 +1,24 @@
-namespace Fusionary.Auth.Google;
-
 using System.Text.Json.Serialization;
 
-public class TokenData
-{
+namespace Fusionary.Auth.Google;
+
+public class TokenData {
     private string[]? _roles;
 
-    [JsonPropertyName("e")] public string Email { get; set; } = "";
+    [JsonPropertyName("e")]
+    public string Email { get; set; } = "";
 
-    [JsonPropertyName("n")] public string Name { get; set; } = "";
+    [JsonPropertyName("n")]
+    public string Name { get; set; } = "";
 
 
     [JsonPropertyName("r")]
     public string[] Roles
     {
-        get => this._roles ?? Array.Empty<string>();
-        set => this._roles = value;
+        get => _roles ?? Array.Empty<string>();
+        set => _roles = value;
     }
 
-    [JsonPropertyName("u")] public string UserID { get; set; }
+    [JsonPropertyName("u")]
+    public string UserID { get; set; } = "";
 }
