@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Auth.Google", "Fu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Auth.Abstractions", "Fusionary.Auth.Abstractions\Fusionary.Auth.Abstractions.csproj", "{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.ClientSecrets", "Fusionary.ClientSecrets\Fusionary.ClientSecrets.csproj", "{205982B6-135B-4093-803B-554159A27651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Tests", "Fusionary.Tests\Fusionary.Tests.csproj", "{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,5 +72,13 @@ Global
 		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D13A06BF-ED6C-4A7F-92BB-0DFBF97769FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205982B6-135B-4093-803B-554159A27651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205982B6-135B-4093-803B-554159A27651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205982B6-135B-4093-803B-554159A27651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205982B6-135B-4093-803B-554159A27651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
