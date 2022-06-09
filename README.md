@@ -4,6 +4,10 @@ Common DotNet libraries
 
 ## Publish All Packages
 
+1. Push Branch
+2. Add Tag (if you don't add a tag, this will build preview packages)
+3. Build Packages
+
 (run in solution directory)
 ```shell
 dotnet pack fusionary.sln --configuration Release
