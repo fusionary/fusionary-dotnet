@@ -12,7 +12,7 @@ public record class AssemblyInformation(string Product, string Description, stri
     /// <summary>
     /// Gets the assembly information from the currently executing assembly.
     /// </summary>
-    public static readonly AssemblyInformation Current = new(Assembly.GetExecutingAssembly());
+    public static readonly AssemblyInformation Current = new(Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly());
     
     /// <summary>
     /// Initializes a new instance of the <see cref="AssemblyInformation" /> class.
