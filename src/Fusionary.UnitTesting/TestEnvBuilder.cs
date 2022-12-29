@@ -14,7 +14,7 @@ public static class TestEnvBuilder {
     public static (IConfiguration, IServiceProvider) BuildEnv(
         ITestOutputHelper outputHelper,
         string envName,
-        Action<IConfigurationBuilder>? configBuilder = default,
+        Func<IConfigurationBuilder, IConfigurationBuilder>? configBuilder = default,
         Action<IServiceCollection, IConfiguration>? serviceBuilder = default
     )
     {
@@ -51,14 +51,16 @@ public static class TestEnvBuilder {
         return services.BuildServiceProvider();
     }
 
-    public static IConfiguration BuildConfiguration(string envName, Action<IConfigurationBuilder>? customBuilder = null)
+    public static IConfiguration BuildConfiguration(string envName, Func<IConfigurationBuilder, IConfigurationBuilder>? customBuilder = null)
     {
         var builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", true, true)
             .AddJsonFile($"appsettings.{envName}.json", true, true)
             .AddEnvironmentVariables();
 
-        customBuilder?.Invoke(builder);
+        if (customBuilder is not null) {
+           builder = customBuilder(builder);
+        }
 
         return builder.Build();
     }

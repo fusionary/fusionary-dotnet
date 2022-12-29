@@ -32,8 +32,9 @@ public abstract class TestBase {
     {
     }
 
-    protected virtual void BuildConfiguration(IConfigurationBuilder builder)
+    protected virtual IConfigurationBuilder BuildConfiguration(IConfigurationBuilder builder)
     {
+        return builder;
     }
 
 
