@@ -1,8 +1,4 @@
-using System.Text.Json;
-
 using Fusionary.ClientSecrets;
-
-using Xunit.Abstractions;
 
 namespace Fusionary.Tests;
 

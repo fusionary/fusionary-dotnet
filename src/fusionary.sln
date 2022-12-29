@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.ClientSecrets", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Tests", "Fusionary.Tests\Fusionary.Tests.csproj", "{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.UnitTesting", "Fusionary.UnitTesting\Fusionary.UnitTesting.csproj", "{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,5 +82,9 @@ Global
 		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13E4C75B-0C46-43AC-ABCB-C27AC4C39D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

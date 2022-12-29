@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Fusionary.ClientSecrets\Fusionary.ClientSecrets.csproj" />
+      <ProjectReference Include="..\Fusionary.UnitTesting\Fusionary.UnitTesting.csproj" />
     </ItemGroup>
 
 </Project>
