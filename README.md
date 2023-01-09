@@ -18,7 +18,7 @@ dotnet nuget push "**/*.nupkg" --skip-duplicate
 
 (run in project directory)
 ```shell
-dotnet pack --configuration Release
+dotnet pack *.csproj --configuration Release
 dotnet nuget push "**/*.nupkg" --skip-duplicate
 ```
 

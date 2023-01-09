@@ -3,11 +3,19 @@ using System.Runtime.ExceptionServices;
 namespace Fusionary.Core;
 
 public interface IResult {
-    ExceptionDispatchInfo? Error { get; set; }
-    
-    string? Message { get; set; }
+    ExceptionDispatchInfo? Error { get; }
 
-    object? ProblemDetail { get; set; }
+    string? Message { get; }
 
-    ResultStatus Status { get; set; }
+    object? ProblemDetail { get; }
+
+    ResultStatus Status { get; }
+
+    object? Value { get; }
+
+    bool HasValue { get; }
+
+    bool HasError { get; }
+
+    bool HasProblemDetail { get; }
 }
