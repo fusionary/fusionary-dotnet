@@ -1,5 +1,3 @@
-using Divergic.Logging.Xunit;
-
 using Fusionary.UnitTesting.Mocks;
 
 using Microsoft.AspNetCore.DataProtection;
@@ -34,12 +32,9 @@ public static class TestEnvBuilder {
         var services = new ServiceCollection();
 
         services.AddLogging(
-            s => s.AddXunit(
-                outputHelper,
-                new LoggingConfig { LogLevel = LogLevel.Debug }
-            )
+            x => x.AddConfiguration(configuration).AddFilter("Fusionary", LogLevel.Trace).AddXunit(outputHelper)
         );
-        
+
         services.AddSingleton<IDataProtectionProvider>(new EphemeralDataProtectionProvider());
         services.AddSingleton(MockHostingEnvironment.Create(envName));
         services.AddSingleton(MockHttpContextAccessor.Create());

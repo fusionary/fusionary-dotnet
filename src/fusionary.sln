@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Tests", "Fusionar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.UnitTesting", "Fusionary.UnitTesting\Fusionary.UnitTesting.csproj", "{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusionary.Slack", "Fusionary.Slack\Fusionary.Slack.csproj", "{CA5103CA-6321-4727-9EFC-1DDA1D0C7807}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,5 +88,9 @@ Global
 		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF0DC4A9-7668-4DA9-A25E-5611CAB8E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA5103CA-6321-4727-9EFC-1DDA1D0C7807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA5103CA-6321-4727-9EFC-1DDA1D0C7807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA5103CA-6321-4727-9EFC-1DDA1D0C7807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA5103CA-6321-4727-9EFC-1DDA1D0C7807}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

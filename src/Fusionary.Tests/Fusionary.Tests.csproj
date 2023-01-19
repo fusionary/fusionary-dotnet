@@ -1,13 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
+        <LangVersion>11</LangVersion>
+        <UserSecretsId>46dd0028-30ee-4983-9b46-72539d3ad363</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Bogus" Version="34.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -21,8 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Fusionary.ClientSecrets\Fusionary.ClientSecrets.csproj" />
-      <ProjectReference Include="..\Fusionary.UnitTesting\Fusionary.UnitTesting.csproj" />
+        <ProjectReference Include="..\Fusionary.ClientSecrets\Fusionary.ClientSecrets.csproj" />
+        <ProjectReference Include="..\Fusionary.Slack\Fusionary.Slack.csproj" />
+        <ProjectReference Include="..\Fusionary.UnitTesting\Fusionary.UnitTesting.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="appsettings.json" />
+        <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
     </ItemGroup>
 
 </Project>
