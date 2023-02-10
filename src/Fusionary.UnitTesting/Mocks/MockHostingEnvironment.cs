@@ -10,7 +10,7 @@ public static class MockHostingEnvironment
     {
         Mock<IHostEnvironment> mock = new();
 
-        mock.Setup(x => x.EnvironmentName).Returns(environmentName ?? Environments.Staging);
+        mock.Setup(x => x.EnvironmentName).Returns(environmentName ?? Environments.Development);
 
         return mock.Object;
     }

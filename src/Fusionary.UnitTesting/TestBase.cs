@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json;
 
 using Microsoft.Extensions.Configuration;
@@ -7,25 +8,23 @@ using Microsoft.Extensions.Hosting;
 namespace Fusionary.UnitTesting;
 
 public abstract class TestBase {
+    private IHost TestHost { get; }
 
-    protected TestBase(ITestOutputHelper outputHelper, string? environmentName = default)
+    protected TestBase(ITestOutputHelper outputHelper)
     {
-        if (string.IsNullOrWhiteSpace(environmentName)) {
-            environmentName = Environments.Development;
-        }
-
         Logger = outputHelper;
         JsonOptions = JsonHelper.CreateOptions();
-        EnvironmentName = environmentName;
-        
-        var (configuration, services) = TestEnvBuilder.BuildEnv(
-            outputHelper, 
-            EnvironmentName, 
-            BuildConfiguration,
-            ConfigureServices);
-        
-        Configuration = configuration;
-        Services = services;
+
+        TestHost = Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration((_, builder) => BuildConfiguration(builder))
+            .ConfigureServices(
+                (context, services) =>
+                {
+                    services.AddCommonServices(context.Configuration, outputHelper);
+                    ConfigureServices(services, context.Configuration);
+                }
+            )
+            .Build();
     }
 
     protected virtual void ConfigureServices(IServiceCollection services, IConfiguration configuration)
@@ -37,16 +36,13 @@ public abstract class TestBase {
         return builder;
     }
 
-
-    protected string EnvironmentName { get; init; } 
-
-    protected IConfiguration Configuration { get; }
+    protected IConfiguration Configuration => Services.GetRequiredService<IConfiguration>();
 
     protected ITestOutputHelper Logger { get; }
 
     protected JsonSerializerOptions JsonOptions { get; }
 
-    protected IServiceProvider Services { get; }
+    protected IServiceProvider Services => TestHost.Services;
 
     protected void LogMessage(string? message)
     {
