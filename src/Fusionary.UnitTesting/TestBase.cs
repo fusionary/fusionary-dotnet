@@ -8,23 +8,33 @@ using Microsoft.Extensions.Hosting;
 namespace Fusionary.UnitTesting;
 
 public abstract class TestBase {
-    private IHost TestHost { get; }
+    private IHostBuilder TestHostBuilder { get; }
+
+    private IHost? _testHost;
+
+    protected IHost TestHost => _testHost ??= TestHostBuilder.Build();
 
     protected TestBase(ITestOutputHelper outputHelper)
     {
         Logger = outputHelper;
         JsonOptions = JsonHelper.CreateOptions();
 
-        TestHost = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((_, builder) => BuildConfiguration(builder))
+        TestHostBuilder = Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration((_, builder) =>
+                {
+                    builder.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string?>("NETCORE_ENVIRONMENT", "Development"), }
+                    );
+                    BuildConfiguration(builder);
+                }
+            )
             .ConfigureServices(
                 (context, services) =>
                 {
                     services.AddCommonServices(context.Configuration, outputHelper);
                     ConfigureServices(services, context.Configuration);
                 }
-            )
-            .Build();
+            );
     }
 
     protected virtual void ConfigureServices(IServiceCollection services, IConfiguration configuration)
