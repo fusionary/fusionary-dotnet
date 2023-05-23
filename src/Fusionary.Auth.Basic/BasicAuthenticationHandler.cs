@@ -57,7 +57,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<BasicAuthHandler
                 && !string.IsNullOrWhiteSpace(headerValue.Parameter)
             )
             {
-                IAuthCredentials clientCredentials = BasicAuth.GetClientAuthFromValue(value);
+                IAuthCredentials clientCredentials = BasicAuth.GetClientAuthFromValue(headerValue.Parameter);
 
                 result = await _authVerificationService.GetAuthenticateResultAsync(
                     clientCredentials,
