@@ -23,6 +23,6 @@ dotnet nuget push "**/*.nupkg" --skip-duplicate
 ```
 
 (run this to cleanup left overs)
-```
+```shell
 rm -rf ./**/*.nupkg
 ```

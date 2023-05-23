@@ -1,5 +1,7 @@
 using System.Text;
 
+using Microsoft.AspNetCore.Authentication;
+
 namespace Fusionary.Auth.Basic;
 
 public static class BasicAuth
@@ -8,7 +10,7 @@ public static class BasicAuth
 
     public static IAuthCredentials GetClientAuthFromValue(string value)
     {
-        byte[] bytes = Convert.FromBase64String(value);
+        byte[] bytes = Base64UrlTextEncoder.Decode(value);
 
         string stringValue = Encoding.UTF8.GetString(bytes);
 
@@ -26,6 +28,6 @@ public static class BasicAuth
 
         byte[] bytes = Encoding.UTF8.GetBytes(value);
 
-        return Convert.ToBase64String(bytes);
+        return Base64UrlTextEncoder.Encode(bytes);
     }
 }
