@@ -20,11 +20,10 @@ public abstract class TestBase {
         JsonOptions = JsonHelper.CreateOptions();
 
         TestHostBuilder = Host.CreateDefaultBuilder()
+            .UseEnvironment(Environments.Development)
             .ConfigureAppConfiguration((_, builder) =>
                 {
-                    builder.AddInMemoryCollection(
-                        new[] { new KeyValuePair<string, string?>("NETCORE_ENVIRONMENT", "Development"), }
-                    );
+                    builder.AddUserSecrets(Assembly.GetExecutingAssembly());
                     BuildConfiguration(builder);
                 }
             )

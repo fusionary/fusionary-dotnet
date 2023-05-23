@@ -21,18 +21,8 @@ public static class UnitTestingExtensions
         );
 
         services.AddSingleton<IDataProtectionProvider>(new EphemeralDataProtectionProvider());
-        services.AddSingleton(
-            s =>
-            {
-                string? envName = configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT") ??
-                                  configuration.GetValue<string>("NETCORE_ENVIRONMENT");
-                return MockHostingEnvironment.Create(envName);
-            }
-        );
         services.AddSingleton(MockHttpContextAccessor.Create());
         services.AddSingleton<ISystemClock>(new MockTime());
-
         services.AddMemoryCache();
-        services.AddHttpContextAccessor();
     }
 }

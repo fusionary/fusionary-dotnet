@@ -49,7 +49,7 @@ public static class ClientSecretsManager {
         var clientSecret = GenerateSecret();
         var appSecret    = CreateAppSecret(clientSecret);
 
-        return new GeneratedSecrets(clientId, clientSecret, appSecret);
+        return new GeneratedSecrets { ClientId = clientId, ClientSecret = clientSecret, AppSecret = appSecret };
     }
 
     private static string GenerateSecret()
@@ -61,14 +61,12 @@ public static class ClientSecretsManager {
     {
         var plainTextBytes = Encoding.UTF8.GetBytes(value);
 
-        return ComputeHash(Combine(plainTextBytes, saltBytes));
+        return ComputeHash(saltBytes, plainTextBytes);
     }
 
-    private static byte[] ComputeHash(byte[] value)
+    private static byte[] ComputeHash(byte[] value, byte[] salt)
     {
-        using var hashAlgorithm = HashAlgorithm.Create(HashAlgorithmName.SHA256.Name!)!;
-
-        return hashAlgorithm.ComputeHash(value);
+        return HMACSHA256.HashData(salt, value);
     }
 
     private static byte[] Combine(byte[] first, byte[] second)
