@@ -14,13 +14,13 @@ public abstract class TestBase {
 
     protected IHost TestHost => _testHost ??= TestHostBuilder.Build();
 
-    protected TestBase(ITestOutputHelper outputHelper)
+    protected TestBase(ITestOutputHelper outputHelper, string? environment = null)
     {
         Logger = outputHelper;
         JsonOptions = JsonHelper.CreateOptions();
 
         TestHostBuilder = Host.CreateDefaultBuilder()
-            .UseEnvironment(Environments.Development)
+            .UseEnvironment(environment ?? Environments.Development)
             .ConfigureAppConfiguration((_, builder) =>
                 {
                     builder.AddUserSecrets(Assembly.GetExecutingAssembly());
